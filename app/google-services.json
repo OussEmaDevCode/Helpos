@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "653752946361",
+    "firebase_url": "https://helpos-274523.firebaseio.com",
+    "project_id": "helpos-274523",
+    "storage_bucket": "helpos-274523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653752946361:android:02ab8f52d993f295345568",
+        "android_client_info": {
+          "package_name": "helpos.helpos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653752946361-nv5q9ahu8h2fmjfcnuc95ep7he0cam9b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "helpos.helpos",
+            "certificate_hash": "23774092b9ff705bf4167638e503f2cf9b311f7e"
+          }
+        },
+        {
+          "client_id": "653752946361-fu2rsf2e8bjp6jukm93kb7a9pbak95ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKc5Df5jAl99U3VtMwlqjMUE8MbF1e4zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653752946361-fu2rsf2e8bjp6jukm93kb7a9pbak95ni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
