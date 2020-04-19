@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_close_white_24dp" />
-                            <entry key="sourceFile" value="C:\Users\oussa" />
+                            <entry key="outputName" value="ic_sign" />
+                            <entry key="sourceFile" value="C:\Users\oussa\Desktop\sign.svg" />
                           </map>
                         </option>
                       </PersistentState>
