@@ -18,3 +18,6 @@ Before you begin, you should have already downloaded the Android Studio SDK and 
 5. Let Android Studio import the project.
 
 6. Build the application in your device by clicking run button.
+
+##APK :
+https://drive.google.com/file/d/1JUQrPVGHZadjMiBoT6bXKqlCNrZclR4-/view?usp=sharing
