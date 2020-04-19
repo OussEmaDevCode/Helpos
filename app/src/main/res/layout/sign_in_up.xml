@@ -24,7 +24,7 @@
                     android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
                     android:minHeight="100dp"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/ic_sign" />
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
