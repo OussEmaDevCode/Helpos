@@ -105,10 +105,8 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/button"
             android:text="Locate"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white" />
+            style="@style/GreenButton"/>
 
         <Button
             android:id="@+id/submit"
@@ -117,9 +115,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/sign_in"
             android:text="Submit"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white" />
+            style="@style/RedButton"/>
     </LinearLayout>
 </ScrollView>

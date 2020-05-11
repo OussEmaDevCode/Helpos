@@ -7,7 +7,9 @@ import butterknife.ButterKnife;
 import helpos.helpos.models.HelpRequest;
 import helpos.helpos.models.StoredUser;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +53,8 @@ public class HelpRequestAcitivy extends AppCompatActivity {
     TextView phone;
     @BindView(R.id.karma)
     TextView karma;
+    @BindView(R.id.roadto)
+    Button roadTo;
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -75,8 +79,10 @@ public class HelpRequestAcitivy extends AppCompatActivity {
         }
 
         if(!currentUserID.equals(helpRequest.getUid())) {
+            //Requests I am fulfilling
             fulfilled.setVisibility(View.GONE);
             person.setVisibility(View.GONE);
+            roadTo.setVisibility(View.VISIBLE);
             authorPhoneWrapper.setVisibility(View.VISIBLE);
             reference.child("Users").child(helpRequest.getUid()).child("phoneNumber").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -109,7 +115,18 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                         .removeValue();
                 finish();
             });
+            roadTo.setOnClickListener(v -> {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr="
+                                +helpRequest.getLatlong().get(0).toString()
+                                +","
+                                +helpRequest.getLatlong().get(1).toString()));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
+            });
         } else {
+            // My requests
+            roadTo.setVisibility(View.GONE);
             if (helpRequest.getPersonHelping() != null) {
                 fulfilled.setVisibility(View.VISIBLE);
                 person.setVisibility(View.VISIBLE);
