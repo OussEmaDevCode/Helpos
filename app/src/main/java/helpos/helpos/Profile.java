@@ -1,5 +1,19 @@
 package helpos.helpos;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,21 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import helpos.helpos.models.HelpRequest;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Profile extends AppCompatActivity {
 
@@ -85,13 +84,10 @@ public class Profile extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(ViewHolder holder, final int position, HelpRequest helpRequest) {
                 holder.title.setText(helpRequest.getTitle());
-                holder.root.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(Profile.this, HelpRequestAcitivy.class);
-                        i.putExtra("helpRequest", helpRequest);
-                        startActivity(i);
-                    }
+                holder.root.setOnClickListener(view -> {
+                    Intent i = new Intent(Profile.this, HelpRequestAcitivy.class);
+                    i.putExtra("helpRequest", helpRequest);
+                    startActivity(i);
                 });
             }
         };
@@ -114,13 +110,10 @@ public class Profile extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(ViewHolder holder, final int position, HelpRequest helpRequest) {
                 holder.title.setText(helpRequest.getTitle());
-                holder.root.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(Profile.this, HelpRequestAcitivy.class);
-                        i.putExtra("helpRequest", helpRequest);
-                        startActivity(i);
-                    }
+                holder.root.setOnClickListener(view -> {
+                    Intent i = new Intent(Profile.this, HelpRequestAcitivy.class);
+                    i.putExtra("helpRequest", helpRequest);
+                    startActivity(i);
                 });
             }
         };
@@ -142,11 +135,8 @@ public class Profile extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(ViewHolder holder, final int position, String person) {
                 holder.title.setText(person);
-                holder.root.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // TODO add on click
-                    }
+                holder.root.setOnClickListener(view -> {
+                    // TODO add on click
                 });
             }
         };

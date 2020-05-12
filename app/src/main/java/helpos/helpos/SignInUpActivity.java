@@ -1,33 +1,23 @@
 package helpos.helpos;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import helpos.helpos.models.StoredUser;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.telephony.PhoneNumberUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import helpos.helpos.utils.Error;
 
 public class SignInUpActivity extends AppCompatActivity {
 
@@ -73,25 +63,25 @@ public class SignInUpActivity extends AppCompatActivity {
     @OnClick(R.id.signInBtn)
     void signIn() {
         if (signIn && checkSignIn()) {
-            Toast.makeText(getApplicationContext(), "Signing you in", Toast.LENGTH_LONG).show();
+            new Error(SignInUpActivity.this, "Signing you in");
             mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             startActivity(new Intent(SignInUpActivity.this, MainActivity.class));
                             finish();
                         } else {
-                            Snackbar.make(parent, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
+                            new Error(parent, task.getException().getLocalizedMessage());
                         }
                     });
         } else if (!signIn && checkSignUp()) {
-            Toast.makeText(getApplicationContext(), "Setting up your account", Toast.LENGTH_LONG).show();
+            new Error(SignInUpActivity.this, "Setting up your account");
             mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             createUser(user);
                         } else {
-                            Snackbar.make(parent, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
+                            new Error(parent, task.getException().getLocalizedMessage());
                         }
                     });
         }

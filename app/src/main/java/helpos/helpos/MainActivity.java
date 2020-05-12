@@ -1,36 +1,21 @@
 package helpos.helpos;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import helpos.helpos.models.HelpRequest;
-import helpos.helpos.models.StoredUser;
-
 import android.Manifest;
-import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,12 +26,20 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import helpos.helpos.models.HelpRequest;
+import helpos.helpos.utils.Error;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -75,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     BottomSheetBehavior behavior;
 
     Location mLocation = null;
-
-    Boolean locked = false;
 
     String userId;
 
@@ -192,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        new Error(bottomSheet, "Failed retrieving help requests");
                     }
                 });
 
@@ -223,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 help.setVisibility(View.VISIBLE);
                                 bottomSheet.setPadding(0, 16, 0, 0);
                                 help.setOnClickListener(v -> {
-                                    if (!locked) {
+                                    if (Error.isNetworkAvailable(MainActivity.this)) {
                                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                                         databaseReference.child("Users")
                                                 .child(userId)
@@ -246,8 +238,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                         emptyText.setVisibility(View.VISIBLE);
                                         content.setVisibility(View.GONE);
                                         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Sorry there are already way too many people out there", Toast.LENGTH_LONG);
                                     }
                                 });
                             }
@@ -256,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            new Error(bottomSheet, "Failed retrieving help request information");
                         }
                     });
             behavior.setState(BottomSheetBehavior.STATE_EXPANDED);

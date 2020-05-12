@@ -1,9 +1,5 @@
 package helpos.helpos;
 
-import androidx.fragment.app.FragmentActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,17 +9,21 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.fragment.app.FragmentActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import helpos.helpos.utils.Error;
 
 public class Picker extends FragmentActivity implements OnMapReadyCallback {
     @BindView(R.id.current_position)
@@ -75,6 +75,7 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        View root = getWindow().getDecorView().getRootView();
         mMap = googleMap;
 
         mMap.setOnMapClickListener(latlng -> {
@@ -99,7 +100,7 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "We couldn't define your location", Toast.LENGTH_SHORT).show();
+                  new Error(root, "We couldn't define your location");
             }
         });
 
@@ -111,7 +112,7 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "Please choose a location", Toast.LENGTH_SHORT).show();
+                new Error(root, "Please choose a location");
             }
         });
 

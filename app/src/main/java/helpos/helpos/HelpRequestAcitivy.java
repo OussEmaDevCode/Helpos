@@ -1,12 +1,5 @@
 package helpos.helpos;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import helpos.helpos.models.HelpRequest;
-import helpos.helpos.models.StoredUser;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,12 +9,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import helpos.helpos.models.HelpRequest;
+import helpos.helpos.models.StoredUser;
+import helpos.helpos.utils.Error;
 
 public class HelpRequestAcitivy extends AppCompatActivity {
 
@@ -84,7 +84,8 @@ public class HelpRequestAcitivy extends AppCompatActivity {
             person.setVisibility(View.GONE);
             roadTo.setVisibility(View.VISIBLE);
             authorPhoneWrapper.setVisibility(View.VISIBLE);
-            reference.child("Users").child(helpRequest.getUid()).child("phoneNumber").addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child("Users").child(helpRequest.getUid()).child("phoneNumber")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     authorPhone.setText(dataSnapshot.getValue().toString());
@@ -92,28 +93,29 @@ public class HelpRequestAcitivy extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 }
             });
             cancel.setOnClickListener(v -> {
-                reference.child("Users")
-                        .child(currentUserID)
-                        .child("CurrentRequests")
-                        .child(helpRequest.getId())
-                        .removeValue();
+                if (Error.isNetworkAvailable(HelpRequestAcitivy.this)) {
+                    reference.child("Users")
+                            .child(currentUserID)
+                            .child("CurrentRequests")
+                            .child(helpRequest.getId())
+                            .removeValue();
 
-                reference.child("HelpRequests")
-                        .child(helpRequest.getId())
-                        .child("personHelping")
-                        .removeValue();
+                    reference.child("HelpRequests")
+                            .child(helpRequest.getId())
+                            .child("personHelping")
+                            .removeValue();
 
-                reference.child("Users")
-                        .child(helpRequest.getUid())
-                        .child("HelpRequests")
-                        .child(helpRequest.getId())
-                        .child("personHelping")
-                        .removeValue();
-                finish();
+                    reference.child("Users")
+                            .child(helpRequest.getUid())
+                            .child("HelpRequests")
+                            .child(helpRequest.getId())
+                            .child("personHelping")
+                            .removeValue();
+                    finish();
+                }
             });
             roadTo.setOnClickListener(v -> {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -146,24 +148,26 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                     }
                 });
                 remove.setOnClickListener(v -> {
-                    reference.child("Users")
-                            .child(helpRequest.getPersonHelping())
-                            .child("CurrentRequests")
-                            .child(helpRequest.getId())
-                            .removeValue();
+                    if (Error.isNetworkAvailable(HelpRequestAcitivy.this)) {
+                        reference.child("Users")
+                                .child(helpRequest.getPersonHelping())
+                                .child("CurrentRequests")
+                                .child(helpRequest.getId())
+                                .removeValue();
 
-                    reference.child("Users")
-                            .child(currentUserID)
-                            .child("HelpRequests")
-                            .child(helpRequest.getId())
-                            .child("personHelping")
-                            .removeValue();
+                        reference.child("Users")
+                                .child(currentUserID)
+                                .child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("personHelping")
+                                .removeValue();
 
-                    reference.child("HelpRequests")
-                            .child(helpRequest.getId())
-                            .child("personHelping")
-                            .removeValue();
-                    finish();
+                        reference.child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("personHelping")
+                                .removeValue();
+                        finish();
+                    }
                 });
             }
             cancel.setOnClickListener(v -> {
@@ -172,50 +176,55 @@ public class HelpRequestAcitivy extends AppCompatActivity {
             });
 
             fulfilled.setOnClickListener(v -> {
-                if (helpRequest.getPersonHelping() != null) {
+                if (Error.isNetworkAvailable(HelpRequestAcitivy.this)) {
+                    if (helpRequest.getPersonHelping() != null) {
+                        reference.child("Users")
+                                .child(helpRequest.getPersonHelping())
+                                .child("karma")
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        long value = (long) dataSnapshot.getValue();
+                                        dataSnapshot.getRef().setValue(value + 10);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                    }
+                    deleteRequest(currentUserID, helpRequest);
                     reference.child("Users")
                             .child(helpRequest.getPersonHelping())
-                            .child("karma")
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            long value =(long) dataSnapshot.getValue();
-                            dataSnapshot.getRef().setValue(value+ 10);
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                            .child("PeopleHelped")
+                            .push()
+                            .setValue(helpRequest.getuName());
+                    finish();
                 }
-                deleteRequest(currentUserID, helpRequest);
-                reference.child("Users")
-                        .child(helpRequest.getPersonHelping())
-                        .child("PeopleHelped")
-                        .push()
-                        .setValue(helpRequest.getuName());
-                finish();
             });
         }
     }
 
     private void deleteRequest(String currentUserID, HelpRequest helpRequest) {
-        reference.child("Users")
-                .child(currentUserID)
-                .child("HelpRequests")
-                .child(helpRequest.getId())
-                .removeValue();
-
-        reference.child("HelpRequests")
-                .child(helpRequest.getId())
-                .removeValue();
-
-        if (helpRequest.getPersonHelping() != null) {
+        if (Error.isNetworkAvailable(HelpRequestAcitivy.this)) {
             reference.child("Users")
-                    .child(helpRequest.getPersonHelping())
-                    .child("CurrentRequests")
+                    .child(currentUserID)
+                    .child("HelpRequests")
+                    .child(helpRequest.getId())
                     .removeValue();
+
+            reference.child("HelpRequests")
+                    .child(helpRequest.getId())
+                    .removeValue();
+
+            if (helpRequest.getPersonHelping() != null) {
+                reference.child("Users")
+                        .child(helpRequest.getPersonHelping())
+                        .child("CurrentRequests")
+                        .removeValue();
+            }
+            finish();
         }
-        finish();
     }
 }
