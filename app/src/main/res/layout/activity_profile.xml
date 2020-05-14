@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Your requests :"
+            android:text="Your help requests :"
             android:textColor="@android:color/darker_gray"
             android:textSize="24sp" />
         <androidx.cardview.widget.CardView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Requests you are fulfilling :"
+            android:text="Requests you are helping :"
             android:textColor="@android:color/darker_gray"
             android:textSize="24sp" />
 

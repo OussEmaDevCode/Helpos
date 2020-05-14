@@ -173,4 +173,9 @@ public class SignInUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

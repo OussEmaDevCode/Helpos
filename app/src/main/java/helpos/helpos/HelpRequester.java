@@ -3,6 +3,8 @@ package helpos.helpos;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -30,6 +32,8 @@ public class HelpRequester extends AppCompatActivity {
     EditText price;
     @BindView(R.id.ispay)
     CheckBox ispay;
+    @BindView(R.id.locate)
+    Button locate;
 
     List<Double> place = new ArrayList<>();
 
@@ -45,10 +49,11 @@ public class HelpRequester extends AppCompatActivity {
     void submit () {
         if (check()) {
             String helpID = random();
+            int priceInt = price.getText().toString().isEmpty() ? -1 : Integer.parseInt(price.getText().toString());
             HelpRequest helpRequest = new HelpRequest(
                     title.getText().toString(),
                     description.getText().toString(),
-                    Integer.parseInt(price.getText().toString()),
+                    priceInt,
                     ispay.isChecked(),
                     place,
                     mAuth.getUid(),
@@ -70,6 +75,11 @@ public class HelpRequester extends AppCompatActivity {
                                     .child(helpID)
                                     .setValue(helpRequest).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
+                                    new Error(HelpRequester.this, "Help request added successfully !");
+                                    Intent returnIntent = new Intent();
+                                    returnIntent.putExtra("lat", place.get(0));
+                                    returnIntent.putExtra("long", place.get(1));
+                                    setResult(Activity.RESULT_OK, returnIntent);
                                     finish();
                                 }
                             });
@@ -87,6 +97,7 @@ public class HelpRequester extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 place.add(data.getDoubleExtra("lat", 0));
                 place.add(data.getDoubleExtra("long", 0));
+                new Error(HelpRequester.this, "Location chosen !");
             }
         }
     }
@@ -102,10 +113,6 @@ public class HelpRequester extends AppCompatActivity {
             description.setError("description too long or too short");
             return false;
         }
-        if (price.getText().toString().isEmpty()) {
-            price.setError("please enter a price");
-            return false;
-        }
         if (place.isEmpty()) {
             new Error(getApplicationContext(), "please choose a place");
             return false;
@@ -119,10 +126,19 @@ public class HelpRequester extends AppCompatActivity {
         setContentView(R.layout.activity_help_requester);
         setTitle("Create Help Request");
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAuth = FirebaseAuth.getInstance();
     }
 
     private String random() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 }

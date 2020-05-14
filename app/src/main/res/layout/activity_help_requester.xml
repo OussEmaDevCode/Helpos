@@ -26,7 +26,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="Enter title here"
+            android:hint="Enter the help request title here"
             android:inputType="text"
             android:singleLine="true" />
 
@@ -83,7 +83,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Able to pay"
+                android:text="Are you able to pay ?"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="24sp" />
 

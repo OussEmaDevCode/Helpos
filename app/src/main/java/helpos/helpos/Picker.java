@@ -77,7 +77,6 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         View root = getWindow().getDecorView().getRootView();
         mMap = googleMap;
-
         mMap.setOnMapClickListener(latlng -> {
             mMap.clear();
             marker = mMap.addMarker(new MarkerOptions().position(latlng));
@@ -125,6 +124,8 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
             LatLng gps = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 15));
         }
+
+        new Error(Picker.this, "Tap to choose a location or click the my location button");
     }
 
     @SuppressLint("MissingPermission")

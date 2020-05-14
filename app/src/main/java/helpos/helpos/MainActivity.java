@@ -2,6 +2,7 @@ package helpos.helpos;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -134,8 +136,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setTitle("Home");
-
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        } else {
+            startActivity(new Intent(MainActivity.this, SignInUpActivity.class));
+        }
 
         behavior = BottomSheetBehavior.from(bottomSheet);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -172,13 +177,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mMap.clear();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             HelpRequest helpRequest = snapshot.getValue(HelpRequest.class);
-                            LatLng position = new LatLng(helpRequest.getLatlong().get(0), helpRequest.getLatlong().get(1));
-                            MarkerOptions markerOptions = new MarkerOptions()
-                                    .position(position)
-                                    .title(helpRequest.getTitle());
-                            Marker marker = mMap.addMarker(markerOptions);
-                            marker.setTag(helpRequest.getId());
+                            if (helpRequest.getPersonHelping() == null) {
+                                LatLng position = new LatLng(helpRequest.getLatlong().get(0), helpRequest.getLatlong().get(1));
+                                MarkerOptions markerOptions = new MarkerOptions()
+                                        .position(position)
+                                        .title(helpRequest.getTitle());
+                                Marker marker = mMap.addMarker(markerOptions);
+                                marker.setTag(helpRequest.getId());
+                            }
                         }
+
                     }
 
                     @Override
@@ -198,7 +206,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             HelpRequest helpRequest = dataSnapshot.getValue(HelpRequest.class);
                             title.setText(helpRequest.getTitle() + " :");
                             description.setText(helpRequest.getDescription());
-                            price.setText(String.valueOf(helpRequest.getPrice()) + "dt");
+                            if (helpRequest.getPrice() >= 0) {
+                                price.setText(String.valueOf(helpRequest.getPrice()) + "dt");
+                            } else {
+                                price.setText("Unknown");
+                            }
                             if (helpRequest.isPay()) {
                                 isPay.setText("yes");
                                 isPay.setTextColor(Color.parseColor("#4DB6AC"));
@@ -238,6 +250,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                         emptyText.setVisibility(View.VISIBLE);
                                         content.setVisibility(View.GONE);
                                         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                                        Intent i = new Intent(MainActivity.this, HelpRequestAcitivy.class);
+                                        i.putExtra("helpRequest", helpRequest);
+                                        startActivity(i);
                                     }
                                 });
                             }
@@ -264,7 +279,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.create) {
-            startActivity(new Intent(MainActivity.this, HelpRequester.class));
+            Intent i = new Intent(MainActivity.this, HelpRequester.class);
+            startActivityForResult(i, 1);
         } else if (item.getItemId() == R.id.profile) {
             startActivity(new Intent(MainActivity.this, Profile.class));
         }
@@ -310,5 +326,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         content.setVisibility(View.GONE);
         emptyText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                LatLng gps = new LatLng(data.getDoubleExtra("lat", 0), data.getDoubleExtra("long", 0));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 18));
+            }
+        }
     }
 }

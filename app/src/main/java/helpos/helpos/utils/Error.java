@@ -11,11 +11,11 @@ import com.google.android.material.snackbar.Snackbar;
 public class Error {
 
     public Error(View root, String errorMsg) {
-        Snackbar.make(root, errorMsg,Snackbar.LENGTH_SHORT).setAction("ok", v -> {}).show();
+        Snackbar.make(root, errorMsg,Snackbar.LENGTH_LONG).setAction("ok", v -> {}).show();
     }
 
     public Error (Context context, String errorMsg) {
-        Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
     }
 
     public static boolean isNetworkAvailable(Context c) {

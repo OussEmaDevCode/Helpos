@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class HelpRequestAcitivy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_request);
         setTitle("Help Request");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         HelpRequest helpRequest = (HelpRequest) getIntent().getSerializableExtra("helpRequest");
@@ -88,7 +90,13 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    authorPhone.setText(dataSnapshot.getValue().toString());
+                    String num = dataSnapshot.getValue().toString();
+                    authorPhone.setText(num);
+                    authorPhone.setOnClickListener(view -> {
+                        Intent intent = new Intent(Intent.ACTION_DIAL,
+                                Uri.fromParts("tel", num, null));
+                        startActivity(intent);
+                    });
                 }
 
                 @Override
@@ -139,6 +147,11 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                         StoredUser storedUser = dataSnapshot.getValue(StoredUser.class);
                         name.setText(storedUser.getUserName());
                         phone.setText(storedUser.getPhoneNumber());
+                        phone.setOnClickListener(view -> {
+                            Intent intent = new Intent(Intent.ACTION_DIAL,
+                                    Uri.fromParts("tel", storedUser.getPhoneNumber(), null));
+                            startActivity(intent);
+                        });
                         karma.setText(String.valueOf(storedUser.getKarma()));
                     }
 
@@ -226,5 +239,13 @@ public class HelpRequestAcitivy extends AppCompatActivity {
             }
             finish();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(HelpRequestAcitivy.this, Profile.class));
+        }
+        return true;
     }
 }

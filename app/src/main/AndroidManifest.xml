@@ -12,16 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_helpos"
         android:supportsRtl="true"
+        android:versionCode="1"
+        android:launchMode="singleTask"
+        android:versionName="1.0"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SignInUpActivity"
-            android:theme="@style/NoBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/NoBar"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,13 +35,29 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".HelpRequester" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".HelpRequester"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Picker"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_picker" />
-        <activity android:name=".Profile" />
-        <activity android:name=".HelpRequestAcitivy"></activity>
+
+        <activity android:name=".Profile"
+
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".HelpRequestAcitivy"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

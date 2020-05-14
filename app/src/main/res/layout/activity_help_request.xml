@@ -52,9 +52,9 @@ help me and thank you." />
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Phone :"
+                android:text="Person asking help phone :"
                 android:textColor="@android:color/black"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/authorPhone"
@@ -64,6 +64,7 @@ help me and thank you." />
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 tools:text="46 325 270"
+                android:textColor="#4DB6AC"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -163,7 +164,7 @@ help me and thank you." />
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Phone :"
+                    android:text="Person's phone :"
                     android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
@@ -175,6 +176,7 @@ help me and thank you." />
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     tools:text="46 325 270"
+                    android:textColor="#4DB6AC"
                     android:textSize="20sp" />
             </RelativeLayout>
 
@@ -219,7 +221,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
-            android:text="Road To"
+            android:text="ITINERARY"
             style="@style/GreenButton"/>
 
         <Button

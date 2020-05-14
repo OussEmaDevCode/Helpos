@@ -1,8 +1,10 @@
 package helpos.helpos;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -49,6 +51,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setTitle("Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         FirebaseUser current = FirebaseAuth.getInstance().getCurrentUser();
         userId = current.getUid();
@@ -132,6 +135,7 @@ public class Profile extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
                 return new ViewHolder(view);
             }
+
             @Override
             protected void onBindViewHolder(ViewHolder holder, final int position, String person) {
                 holder.title.setText(person);
@@ -141,5 +145,13 @@ public class Profile extends AppCompatActivity {
             }
         };
         people_helped.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            startActivity(new Intent(Profile.this, MainActivity.class));
+        }
+        return true;
     }
 }
