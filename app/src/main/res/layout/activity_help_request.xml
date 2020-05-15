@@ -44,32 +44,6 @@ help me and thank you." />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/authorPhoneWrapper"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="Person asking help phone :"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/authorPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                tools:text="46 325 270"
-                android:textColor="#4DB6AC"
-                android:textSize="20sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
@@ -141,7 +115,7 @@ help me and thank you." />
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name :"
-                    android:layout_marginLeft="16dp"
+                    android:layout_margin="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
@@ -153,30 +127,6 @@ help me and thank you." />
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
                     tools:text="Hassan Hosni"
-                    android:textSize="20sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Person's phone :"
-                    android:textColor="@android:color/black"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    tools:text="46 325 270"
-                    android:textColor="#4DB6AC"
                     android:textSize="20sp" />
             </RelativeLayout>
 
@@ -210,10 +160,21 @@ help me and thank you." />
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="22dp"
                 android:text="REMOVE PERSON"
                 style="@style/RedButton"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="40dp"
+            android:text="Call"
+            style="@style/GreenButton"/>
+
         <Button
             android:id="@+id/roadto"
             android:layout_width="match_parent"

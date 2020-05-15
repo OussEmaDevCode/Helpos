@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +41,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import helpos.helpos.models.HelpRequest;
 import helpos.helpos.utils.Error;
 
@@ -66,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     View content;
     @BindView(R.id.emptyText)
     View emptyText;
+
+    @OnClick(R.id.add)
+    void create() {
+        Intent i = new Intent(MainActivity.this, HelpRequester.class);
+        startActivityForResult(i, 1);
+    }
 
     BottomSheetBehavior behavior;
 
@@ -278,10 +286,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.create) {
-            Intent i = new Intent(MainActivity.this, HelpRequester.class);
-            startActivityForResult(i, 1);
-        } else if (item.getItemId() == R.id.profile) {
+        if (item.getItemId() == R.id.profile) {
             startActivity(new Intent(MainActivity.this, Profile.class));
         }
         return super.onOptionsItemSelected(item);

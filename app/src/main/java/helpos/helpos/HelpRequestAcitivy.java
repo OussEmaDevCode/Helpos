@@ -32,10 +32,6 @@ public class HelpRequestAcitivy extends AppCompatActivity {
     TextView description;
     @BindView(R.id.author)
     TextView author;
-    @BindView(R.id.authorPhone)
-    TextView authorPhone;
-    @BindView(R.id.authorPhoneWrapper)
-    View authorPhoneWrapper;
     @BindView(R.id.price)
     TextView price;
     @BindView(R.id.ability)
@@ -50,12 +46,12 @@ public class HelpRequestAcitivy extends AppCompatActivity {
     Button fulfilled;
     @BindView(R.id.name)
     TextView name;
-    @BindView(R.id.phone)
-    TextView phone;
     @BindView(R.id.karma)
     TextView karma;
     @BindView(R.id.roadto)
     Button roadTo;
+    @BindView(R.id.call)
+    Button call;
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -85,14 +81,13 @@ public class HelpRequestAcitivy extends AppCompatActivity {
             fulfilled.setVisibility(View.GONE);
             person.setVisibility(View.GONE);
             roadTo.setVisibility(View.VISIBLE);
-            authorPhoneWrapper.setVisibility(View.VISIBLE);
+            call.setVisibility(View.VISIBLE);
             reference.child("Users").child(helpRequest.getUid()).child("phoneNumber")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String num = dataSnapshot.getValue().toString();
-                    authorPhone.setText(num);
-                    authorPhone.setOnClickListener(view -> {
+                    call.setOnClickListener(view -> {
                         Intent intent = new Intent(Intent.ACTION_DIAL,
                                 Uri.fromParts("tel", num, null));
                         startActivity(intent);
@@ -137,6 +132,7 @@ public class HelpRequestAcitivy extends AppCompatActivity {
         } else {
             // My requests
             roadTo.setVisibility(View.GONE);
+            call.setVisibility(View.GONE);
             if (helpRequest.getPersonHelping() != null) {
                 fulfilled.setVisibility(View.VISIBLE);
                 person.setVisibility(View.VISIBLE);
@@ -146,8 +142,8 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         StoredUser storedUser = dataSnapshot.getValue(StoredUser.class);
                         name.setText(storedUser.getUserName());
-                        phone.setText(storedUser.getPhoneNumber());
-                        phone.setOnClickListener(view -> {
+                        call.setVisibility(View.VISIBLE);
+                        call.setOnClickListener(view -> {
                             Intent intent = new Intent(Intent.ACTION_DIAL,
                                     Uri.fromParts("tel", storedUser.getPhoneNumber(), null));
                             startActivity(intent);

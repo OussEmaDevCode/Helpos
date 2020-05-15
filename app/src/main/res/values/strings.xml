@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Helpos</string>
-    <string name="title_activity_main">Map</string>
-    <string name="title_activity_picker">Map</string>
+    <string name="title_activity_main">Main</string>
+    <string name="title_activity_picker">Picker</string>
 </resources>
