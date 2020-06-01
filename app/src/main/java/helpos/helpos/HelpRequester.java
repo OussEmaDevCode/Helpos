@@ -9,17 +9,22 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import helpos.helpos.models.HelpRequest;
+import helpos.helpos.models.StoredUser;
 import helpos.helpos.utils.Error;
 
 public class HelpRequester extends AppCompatActivity {
@@ -34,6 +39,8 @@ public class HelpRequester extends AppCompatActivity {
     CheckBox ispay;
     @BindView(R.id.locate)
     Button locate;
+
+    StoredUser currentUser;
 
     List<Double> place = new ArrayList<>();
 
@@ -56,10 +63,11 @@ public class HelpRequester extends AppCompatActivity {
                     priceInt,
                     ispay.isChecked(),
                     place,
-                    mAuth.getUid(),
+                    currentUser.getUserId(),
                     helpID,
-                    mAuth.getCurrentUser().getDisplayName()
-                    , null);
+                    currentUser.getUserName()
+                    , null
+                    ,currentUser.isOrg());
 
             FirebaseDatabase.getInstance()
                     .getReference()
@@ -128,6 +136,17 @@ public class HelpRequester extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(StoredUser.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private String random() {

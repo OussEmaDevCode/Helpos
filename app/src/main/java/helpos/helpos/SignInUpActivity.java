@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +43,11 @@ public class SignInUpActivity extends AppCompatActivity {
     Button signInBtn;
     @BindView(R.id.parent)
     View parent;
+    @BindView(R.id.org_wrapper)
+    View orgWrap;
+    @BindView(R.id.org)
+    CheckBox org;
+
     Boolean signIn = true;
 
     DatabaseReference users = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -51,11 +60,13 @@ public class SignInUpActivity extends AppCompatActivity {
             signInBtn.setText("Sign Up");
             phoneWrap.setVisibility(View.VISIBLE);
             userWrap.setVisibility(View.VISIBLE);
+            orgWrap.setVisibility(View.VISIBLE);
         } else {
             createBtn.setText("Create an account");
             signInBtn.setText("Sign In");
             phoneWrap.setVisibility(View.GONE);
             userWrap.setVisibility(View.GONE);
+            orgWrap.setVisibility(View.GONE);
         }
         signIn = !signIn;
     }
@@ -164,8 +175,12 @@ public class SignInUpActivity extends AppCompatActivity {
 
         Fuser.updateProfile(profileUpdates).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                StoredUser storedUser = org.isChecked() ?
+                        new StoredUser(user.getText().toString(), Fuser.getUid(), phone.getText().toString(), null, org.isChecked()) :
+                        new StoredUser(user.getText().toString(), Fuser.getUid(), phone.getText().toString(), 0, org.isChecked());
+
                 users.child(Fuser.getUid())
-                        .setValue(new StoredUser(user.getText().toString(), Fuser.getUid(), phone.getText().toString(), 0))
+                        .setValue(storedUser)
                         .addOnCompleteListener(task1 -> {
                             startActivity(new Intent(SignInUpActivity.this, MainActivity.class));
                             finish();

@@ -172,7 +172,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
-            android:text="Call"
+            android:text="Call PERSON"
             style="@style/GreenButton"/>
 
         <Button
@@ -193,7 +193,7 @@ help me and thank you." />
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="CANCEL"
+            android:text="CANCEL REQUEST"
             style="@style/RedButton"/>
 
         <Button
@@ -203,7 +203,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="fulfilled"
+            android:text="REQUEST fulfilled"
             android:visibility="gone"
             style="@style/GreenButton"/>
     </LinearLayout>

@@ -4,12 +4,14 @@ public class StoredUser {
     private String userName;
     private String userId;
     private String phoneNumber;
-    private int karma;
-    public StoredUser(String userName, String userId, String phoneNumber, int karma){
+    private Integer karma;
+    private boolean isOrg;
+    public StoredUser(String userName, String userId, String phoneNumber, Integer karma, boolean isOrg){
         this.userId = userId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.karma = karma;
+        this.isOrg = isOrg;
     }
     public StoredUser(){}
     public String getUserId() {
@@ -36,12 +38,20 @@ public class StoredUser {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getKarma() {
+    public Integer getKarma() {
         return karma;
     }
 
-    public void setKarma(int karma) {
+    public void setKarma(Integer karma) {
         this.karma = karma;
+    }
+
+    public boolean isOrg() {
+        return this.isOrg;
+    }
+
+    public void setOrg(boolean isOrg) {
+        this.isOrg = isOrg;
     }
 }
 

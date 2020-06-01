@@ -13,8 +13,10 @@ public class HelpRequest implements Serializable {
     private String id;
     private String uName;
     private String personHelping;
+    private boolean isOrg;
 
-    public HelpRequest(String title, String description, int price, boolean isPay, List<Double> latlong, String uid, String id, String uName, String personHelping){
+    public HelpRequest(String title, String description, int price, boolean isPay,
+                       List<Double> latlong, String uid, String id, String uName, String personHelping, boolean isOrg){
         this.title = title;
         this.description = description;
         this.price = price;
@@ -24,6 +26,7 @@ public class HelpRequest implements Serializable {
         this.id = id;
         this.uName = uName;
         this.personHelping = personHelping;
+        this.isOrg = isOrg;
     }
     public HelpRequest () {}
 
@@ -97,5 +100,13 @@ public class HelpRequest implements Serializable {
 
     public void setPersonHelping(String personHelping) {
         this.personHelping = personHelping;
+    }
+
+    public boolean isOrg() {
+        return isOrg;
+    }
+
+    public void setOrg(boolean org) {
+        isOrg = org;
     }
 }

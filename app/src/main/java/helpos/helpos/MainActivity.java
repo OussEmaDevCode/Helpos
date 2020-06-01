@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -206,11 +207,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMarkerClickListener(marker -> {
             emptyText.setVisibility(View.GONE);
             content.setVisibility(View.VISIBLE);
+            help.setVisibility(View.INVISIBLE);
+            bottomSheet.setPadding(0, 0, 0, 0);
             FirebaseDatabase.getInstance().getReference().child("HelpRequests")
                     .child(marker.getTag().toString())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                             HelpRequest helpRequest = dataSnapshot.getValue(HelpRequest.class);
                             title.setText(helpRequest.getTitle() + " :");
                             description.setText(helpRequest.getDescription());
@@ -228,15 +232,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                             if (helpRequest.getUid().equals(userId)) {
                                 author.setText("-" + "You");
-                                help.setVisibility(View.INVISIBLE);
-                                bottomSheet.setPadding(0, 0, 0, 0);
+                            } else if (helpRequest.isOrg()) {
+                                databaseReference.child("Users")
+                                        .child(userId)
+                                        .child("CurrentRequests")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (!dataSnapshot.hasChild(helpRequest.getId())) {
+                                                    author.setText("-" + helpRequest.getuName());
+                                                    help.setVisibility(View.VISIBLE);
+                                                    bottomSheet.setPadding(0, 16, 0, 0);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
                             } else {
                                 author.setText("-" + helpRequest.getuName());
                                 help.setVisibility(View.VISIBLE);
                                 bottomSheet.setPadding(0, 16, 0, 0);
-                                help.setOnClickListener(v -> {
-                                    if (Error.isNetworkAvailable(MainActivity.this)) {
-                                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                            }
+                            help.setOnClickListener(v -> {
+                                if (Error.isNetworkAvailable(MainActivity.this)) {
+                                    if (!helpRequest.isOrg()) {
                                         databaseReference.child("Users")
                                                 .child(userId)
                                                 .child("CurrentRequests")
@@ -254,17 +276,36 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                                 .child(helpRequest.getId())
                                                 .child("personHelping")
                                                 .setValue(userId);
-                                        marker.remove();
-                                        emptyText.setVisibility(View.VISIBLE);
-                                        content.setVisibility(View.GONE);
-                                        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                                        Intent i = new Intent(MainActivity.this, HelpRequestAcitivy.class);
-                                        i.putExtra("helpRequest", helpRequest);
-                                        startActivity(i);
-                                    }
-                                });
-                            }
+                                    } else {
+                                        databaseReference.child("Users")
+                                                .child(userId)
+                                                .child("CurrentRequests")
+                                                .child(helpRequest.getId())
+                                                .setValue(helpRequest);
 
+                                        databaseReference.child("HelpRequests")
+                                                .child(helpRequest.getId())
+                                                .child("peopleHelping")
+                                                .push()
+                                                .setValue(userId);
+
+                                        databaseReference.child("Users")
+                                                .child(helpRequest.getUid())
+                                                .child("HelpRequests")
+                                                .child(helpRequest.getId())
+                                                .child("peopleHelping")
+                                                .push()
+                                                .setValue(userId);
+                                    }
+                                    marker.remove();
+                                    emptyText.setVisibility(View.VISIBLE);
+                                    content.setVisibility(View.GONE);
+                                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                                    Intent i = new Intent(MainActivity.this, HelpRequestAcitivy.class);
+                                    i.putExtra("helpRequest", helpRequest);
+                                    startActivity(i);
+                                }
+                            });
                         }
 
                         @Override
