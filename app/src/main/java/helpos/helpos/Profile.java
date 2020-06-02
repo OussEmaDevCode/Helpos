@@ -1,6 +1,5 @@
 package helpos.helpos;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import helpos.helpos.models.HelpRequest;
+import helpos.helpos.viewHolder.ViewHolder;
 
 public class Profile extends AppCompatActivity {
 
@@ -88,7 +88,8 @@ public class Profile extends AppCompatActivity {
             protected void onBindViewHolder(ViewHolder holder, final int position, HelpRequest helpRequest) {
                 holder.title.setText(helpRequest.getTitle());
                 holder.root.setOnClickListener(view -> {
-                    Intent i = new Intent(Profile.this, HelpRequestAcitivy.class);
+                    Intent i = helpRequest.isOrg() ? new Intent(Profile.this, OrgHelpRequestActivty.class)
+                            : new Intent(Profile.this, HelpRequestAcitivy.class);
                     i.putExtra("helpRequest", helpRequest);
                     startActivity(i);
                 });

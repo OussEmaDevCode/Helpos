@@ -44,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import helpos.helpos.models.HelpRequest;
+import helpos.helpos.models.StoredUser;
 import helpos.helpos.utils.Error;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     BottomSheetBehavior behavior;
+
+    StoredUser currentUser;
 
     Location mLocation = null;
 
@@ -151,6 +154,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(new Intent(MainActivity.this, SignInUpActivity.class));
         }
 
+        FirebaseDatabase.getInstance().getReference().child("Users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(StoredUser.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         behavior = BottomSheetBehavior.from(bottomSheet);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -211,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             bottomSheet.setPadding(0, 0, 0, 0);
             FirebaseDatabase.getInstance().getReference().child("HelpRequests")
                     .child(marker.getTag().toString())
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                    .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -233,13 +248,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             if (helpRequest.getUid().equals(userId)) {
                                 author.setText("-" + "You");
                             } else if (helpRequest.isOrg()) {
-                                databaseReference.child("Users")
-                                        .child(userId)
-                                        .child("CurrentRequests")
+                                databaseReference.child("HelpRequests")
+                                        .child(helpRequest.getId())
+                                        .child("peopleHelping")
                                         .addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                if (!dataSnapshot.hasChild(helpRequest.getId())) {
+                                                if (!dataSnapshot.hasChild(userId)) {
                                                     author.setText("-" + helpRequest.getuName());
                                                     help.setVisibility(View.VISIBLE);
                                                     bottomSheet.setPadding(0, 16, 0, 0);
@@ -258,13 +273,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                             help.setOnClickListener(v -> {
                                 if (Error.isNetworkAvailable(MainActivity.this)) {
-                                    if (!helpRequest.isOrg()) {
-                                        databaseReference.child("Users")
-                                                .child(userId)
-                                                .child("CurrentRequests")
-                                                .child(helpRequest.getId())
-                                                .setValue(helpRequest);
+                                    databaseReference.child("Users")
+                                            .child(userId)
+                                            .child("CurrentRequests")
+                                            .child(helpRequest.getId())
+                                            .setValue(helpRequest);
 
+                                    if (!helpRequest.isOrg()) {
                                         databaseReference.child("HelpRequests")
                                                 .child(helpRequest.getId())
                                                 .child("personHelping")
@@ -277,25 +292,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                                 .child("personHelping")
                                                 .setValue(userId);
                                     } else {
-                                        databaseReference.child("Users")
-                                                .child(userId)
-                                                .child("CurrentRequests")
-                                                .child(helpRequest.getId())
-                                                .setValue(helpRequest);
-
                                         databaseReference.child("HelpRequests")
                                                 .child(helpRequest.getId())
                                                 .child("peopleHelping")
-                                                .push()
-                                                .setValue(userId);
+                                                .child(userId)
+                                                .setValue(currentUser);
 
                                         databaseReference.child("Users")
                                                 .child(helpRequest.getUid())
                                                 .child("HelpRequests")
                                                 .child(helpRequest.getId())
                                                 .child("peopleHelping")
-                                                .push()
-                                                .setValue(userId);
+                                                .child(userId)
+                                                .setValue(currentUser);
                                     }
                                     marker.remove();
                                     emptyText.setVisibility(View.VISIBLE);

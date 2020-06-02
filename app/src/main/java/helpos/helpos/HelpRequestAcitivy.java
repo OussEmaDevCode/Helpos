@@ -105,18 +105,33 @@ public class HelpRequestAcitivy extends AppCompatActivity {
                             .child("CurrentRequests")
                             .child(helpRequest.getId())
                             .removeValue();
+                    if(!helpRequest.isOrg()) {
+                        reference.child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("personHelping")
+                                .removeValue();
 
-                    reference.child("HelpRequests")
-                            .child(helpRequest.getId())
-                            .child("personHelping")
-                            .removeValue();
+                        reference.child("Users")
+                                .child(helpRequest.getUid())
+                                .child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("personHelping")
+                                .removeValue();
+                    } else {
+                        reference.child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("peopleHelping")
+                                .child(currentUserID)
+                                .removeValue();
 
-                    reference.child("Users")
-                            .child(helpRequest.getUid())
-                            .child("HelpRequests")
-                            .child(helpRequest.getId())
-                            .child("personHelping")
-                            .removeValue();
+                        reference.child("Users")
+                                .child(helpRequest.getUid())
+                                .child("HelpRequests")
+                                .child(helpRequest.getId())
+                                .child("peopleHelping")
+                                .child(currentUserID)
+                                .removeValue();
+                    }
                     finish();
                 }
             });

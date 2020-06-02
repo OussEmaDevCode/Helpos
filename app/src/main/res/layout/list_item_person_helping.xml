@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Oussama Hassini"
+            android:id="@+id/list_item_title"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="36dp"
+                android:id="@+id/list_item_phone"
+                android:layout_height="36dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/ic_phone_green_24dp" />
+            <Button
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/list_item_remove"
+                android:background="@drawable/ic_close_red_24dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

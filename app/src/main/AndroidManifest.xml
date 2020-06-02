@@ -5,21 +5,20 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_helpos"
         android:label="@string/app_name"
+        android:launchMode="singleTask"
         android:roundIcon="@drawable/ic_helpos"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
         android:versionCode="1"
-        android:launchMode="singleTask"
-        android:versionName="1.0"
-        android:theme="@style/AppTheme">
+        android:versionName="1.0">
         <activity
             android:name=".SignInUpActivity"
-            android:theme="@style/NoBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/NoBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,29 +34,28 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".HelpRequester"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".HelpRequester"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Picker"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_picker" />
-
-        <activity android:name=".Profile"
-
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".HelpRequestAcitivy"
-            android:screenOrientation="portrait"></activity>
+            android:label="@string/title_activity_picker"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HelpRequestAcitivy"
+            android:screenOrientation="portrait" />
+        <activity android:name=".OrgHelpRequestActivty"></activity>
     </application>
 
 </manifest>
