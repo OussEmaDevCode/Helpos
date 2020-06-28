@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Helpos</string>
+    <string name="title_activity_main">Principal</string>
+    <string name="title_activity_picker">Choisisseur</string>
+    <string name="estimated_price">Prix estimé :</string>
+    <string name="ability_to_pay">La possibilité de payer :</string>
+    <string name="none">non</string>
+    <string name="call_person">appeler la personne</string>
+    <string name="itinerary">ITINÉRAIRE</string>
+    <string name="cancel_request">ANNULER LA DEMANDE</string>
+    <string name="request_fulfilled">DEMANDE FAITE</string>
+    <string name="person_helping_you">Personne qui vous aide :</string>
+    <string name="name">Nom :</string>
+    <string name="karma">karma :</string>
+    <string name="remove_person">SUPPRIMER LA PERSONNE</string>
+    <string name="title">Titre</string>
+    <string name="enter_the_help_request_title_here">Saisissez le titre de la demande d\'aide ici</string>
+    <string name="description">Description</string>
+    <string name="enter_description_here">Entrez la description ici</string>
+    <string name="enter_price_here">Entrez le prix ici</string>
+    <string name="are_you_able_to_pay">Pouvez-vous payer?</string>
+    <string name="locate">Localiser</string>
+    <string name="submit">Soumettre</string>
+    <string name="people_helping">Personnes qui vous aident :</string>
+    <string name="your_help_requests">Vos demandes d\'aide</string>
+    <string name="requests_you_are_helping">Demandes d\'aide que vous faites :</string>
+    <string name="people_you_helped">Personne que vous avez aidé :</string>
+    <string name="sign_out">Déconnexion</string>
+    <string name="helper_text">Tous ces marqueurs sont des personnes ayant besoin d\'aide, cliquez sur l'un pour commencer</string>
+    <string name="help">AIDER</string>
+    <string name="enter_your_full_name">Entrez votre nom complet</string>
+    <string name="organization">Organisation ?</string>
+    <string name="enter_email">Entrez l\'email</string>
+    <string name="enter_phone_number">Entez le numére de télephone</string>
+    <string name="enter_password">Entrez le mot de passe</string>
+    <string name="sign_in">se connecter</string>
+    <string name="create_an_account">Créer un compte</string>
+</resources>

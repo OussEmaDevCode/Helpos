@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Helpos</string>
+    <string name="title_activity_main">الأساسية</string>
+    <string name="title_activity_picker">منقار</string>
+    <string name="estimated_price">السعر المقدر :</string>
+    <string name="ability_to_pay">القدرة على الدفع :</string>
+    <string name="none">لا شيء</string>
+    <string name="call_person">اتصل بشخص</string>
+    <string name="itinerary">مسار الرحلة</string>
+    <string name="cancel_request">إلغاء الطلب</string>
+    <string name="request_fulfilled">تم تنفيذ الطلب</string>
+    <string name="person_helping_you">شخص يساعدك:</string>
+    <string name="name">اسم :</string>
+    <string name="karma">الكرمة :</string>
+    <string name="remove_person">إزالة الشخص</string>
+    <string name="title">عنوان</string>
+    <string name="enter_the_help_request_title_here">أدخل عنوان طلب المساعدة هنا</string>
+    <string name="description">وصف</string>
+    <string name="enter_description_here">أدخل الوصف هنا</string>
+    <string name="enter_price_here">أدخل السعر هنا</string>
+    <string name="are_you_able_to_pay">هل أنت قادر على الدفع؟</string>
+    <string name="locate">حدد</string>
+    <string name="submit">إرسال</string>
+    <string name="people_helping">الأشخاص الذين يساعدون:</string>
+    <string name="your_help_requests">طلبات المساعدة الخاصة بك:</string>
+    <string name="requests_you_are_helping">الطلبات التي تساعدها:</string>
+    <string name="people_you_helped">الأشخاص الذين ساعدتهم:</string>
+    <string name="sign_out">خروج</string>
+    <string name="helper_text">كل هذه العلامات هي أشخاص بحاجة للمساعدة ، انقر على واحدة للبدء</string>
+    <string name="help">ساعد</string>
+    <string name="enter_your_full_name">أدخل اسمك الكامل</string>
+    <string name="organization">منظمة ؟</string>
+    <string name="enter_email">أدخل البريد الإلكتروني</string>
+    <string name="enter_phone_number">أدخل رقم الهاتف</string>
+    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="create_an_account">انشئ حساب</string>
+</resources>
