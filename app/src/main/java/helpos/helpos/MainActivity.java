@@ -239,10 +239,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 price.setText("Unknown");
                             }
                             if (helpRequest.isPay()) {
-                                isPay.setText("yes");
+                                isPay.setText(R.string.yes);
                                 isPay.setTextColor(Color.parseColor("#4DB6AC"));
                             } else {
-                                isPay.setText("none");
+                                isPay.setText(R.string.none);
                                 isPay.setTextColor(Color.parseColor("#B71C1C"));
                             }
                             if (helpRequest.getUid().equals(userId)) {

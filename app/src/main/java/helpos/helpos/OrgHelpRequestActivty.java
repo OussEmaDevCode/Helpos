@@ -66,10 +66,10 @@ public class OrgHelpRequestActivty extends AppCompatActivity {
         author.setText("-" + helpRequest.getuName());
         price.setText(String.valueOf(helpRequest.getPrice()) + "dt");
         if (helpRequest.isPay()) {
-            ability.setText("yes");
+            ability.setText(R.string.yes);
             ability.setTextColor(Color.parseColor("#4DB6AC"));
         } else {
-            ability.setText("none");
+            ability.setText(R.string.none);
             ability.setTextColor(Color.parseColor("#B71C1C"));
         }
         peopleHelping.setHasFixedSize(true);

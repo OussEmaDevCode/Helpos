@@ -27,7 +27,7 @@
     <string name="requests_you_are_helping">Demandes d\'aide que vous faites :</string>
     <string name="people_you_helped">Personne que vous avez aidé :</string>
     <string name="sign_out">Déconnexion</string>
-    <string name="helper_text">Tous ces marqueurs sont des personnes ayant besoin d\'aide, cliquez sur l'un pour commencer</string>
+    <string name="helper_text">Tous ces marqueurs sont des personnes ayant besoin d\'aide, cliquez sur l\'un pour commencer</string>
     <string name="help">AIDER</string>
     <string name="enter_your_full_name">Entrez votre nom complet</string>
     <string name="organization">Organisation ?</string>
@@ -36,4 +36,5 @@
     <string name="enter_password">Entrez le mot de passe</string>
     <string name="sign_in">se connecter</string>
     <string name="create_an_account">Créer un compte</string>
+    <string name="yes">oui</string>
 </resources>
