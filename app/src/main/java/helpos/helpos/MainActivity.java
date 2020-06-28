@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                            String[] permissions, int[] grantResults) {
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
+                //getCurrentLocation();
                 if (mMap != null && mLocation != null) {
                     LatLng gps = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 17));
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
             mMap.getUiSettings().setAllGesturesEnabled(true);
-            getCurrentLocation();
+            //getCurrentLocation();
         }
         if (mLocation != null) {
             LatLng gps = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());

@@ -43,7 +43,7 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
             if (location != null && mMap != null) {
                 mLocation = location;
                 LatLng gps = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 15));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 17));
             }
         }
         @Override
@@ -122,7 +122,7 @@ public class Picker extends FragmentActivity implements OnMapReadyCallback {
 
         if (mLocation != null) {
             LatLng gps = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 15));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gps, 17));
         }
 
         new Error(Picker.this, "Tap to choose a location or click the my location button");
