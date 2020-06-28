@@ -51,7 +51,7 @@ help me and thank you." />
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Estimated price :"
+                android:text="@string/estimated_price"
                 android:textColor="@android:color/black"
                 android:textSize="22sp" />
 
@@ -75,7 +75,7 @@ help me and thank you." />
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Ability to pay :"
+                android:text="@string/ability_to_pay"
                 android:textColor="@android:color/black"
                 android:textSize="22sp" />
 
@@ -86,7 +86,7 @@ help me and thank you." />
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="none"
+                android:text="@string/none"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -101,7 +101,7 @@ help me and thank you." />
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="People helping :"
+                android:text="@string/people_helping"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="24sp" />
 
@@ -129,7 +129,7 @@ help me and thank you." />
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="CANCEL REQUEST" />
+            android:text="@string/cancel_request" />
 
         <Button
             android:id="@+id/fulfilled"
@@ -139,7 +139,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="REQUEST fulfilled"
+            android:text="@string/request_fulfilled"
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

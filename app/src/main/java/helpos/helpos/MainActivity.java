@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             bottomSheet.setPadding(0, 0, 0, 0);
             FirebaseDatabase.getInstance().getReference().child("HelpRequests")
                     .child(marker.getTag().toString())
-                    .addValueEventListener(new ValueEventListener() {
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();

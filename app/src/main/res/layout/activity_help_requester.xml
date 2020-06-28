@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Title"
+            android:text="@string/title"
             android:textColor="@android:color/darker_gray"
             android:textSize="24sp" />
 
@@ -26,7 +26,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="Enter the help request title here"
+            android:hint="@string/enter_the_help_request_title_here"
             android:inputType="text"
             android:singleLine="true" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Title"
+            android:text="@string/description"
             android:textColor="@android:color/darker_gray"
             android:textSize="24sp" />
 
@@ -48,7 +48,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/edittextbg"
             android:gravity="top"
-            android:hint="Enter description here"
+            android:hint="@string/enter_description_here"
             android:inputType="text|textMultiLine"
             android:padding="12dp"
             android:scrollbars="vertical" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Estimated price"
+            android:text="@string/estimated_price"
             android:textColor="@android:color/darker_gray"
             android:textSize="24sp" />
 
@@ -69,7 +69,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:hint="Enter price here"
+            android:hint="@string/enter_price_here"
             android:inputType="number"
             android:singleLine="true" />
 
@@ -83,7 +83,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Are you able to pay ?"
+                android:text="@string/are_you_able_to_pay"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="24sp" />
 
@@ -104,7 +104,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="Locate"
+            android:text="@string/locate"
             style="@style/GreenButton"/>
 
         <Button
@@ -114,7 +114,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="Submit"
+            android:text="@string/submit"
             style="@style/RedButton"/>
     </LinearLayout>
 </ScrollView>

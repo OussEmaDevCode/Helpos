@@ -36,7 +36,7 @@
                 android:id="@+id/login_user_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your full name"
+                android:hint="@string/enter_your_full_name"
                 android:textColorHint="@android:color/white"
                 android:theme="@style/TextLabel"
                 android:visibility="gone">
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Organization ?"
+                    android:text="@string/organization"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
@@ -83,7 +83,7 @@
                 android:id="@+id/login_mail_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter email"
+                android:hint="@string/enter_email"
                 android:textColorHint="@android:color/white"
                 android:theme="@style/TextLabel">
 
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="Enter phone number"
+                android:hint="@string/enter_phone_number"
                 android:textColorHint="@android:color/white"
                 android:theme="@style/TextLabel"
                 android:visibility="gone">
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="Enter password"
+                android:hint="@string/enter_password"
                 android:textColorHint="@android:color/white"
                 android:theme="@style/TextLabel">
 
@@ -154,7 +154,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="24dp"
-                android:text="Sign in" />
+                android:text="@string/sign_in" />
         </LinearLayout>
 
         <Button
@@ -164,7 +164,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@null"
-            android:text="Create an account"
+            android:text="@string/create_an_account"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </RelativeLayout>

@@ -50,7 +50,7 @@ help me and thank you." />
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Estimated price :"
+                android:text="@string/estimated_price"
                 android:textColor="@android:color/black"
                 android:textSize="22sp" />
 
@@ -74,7 +74,7 @@ help me and thank you." />
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Ability to pay :"
+                android:text="@string/ability_to_pay"
                 android:textColor="@android:color/black"
                 android:textSize="22sp" />
 
@@ -85,7 +85,7 @@ help me and thank you." />
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:text="none"
+                android:text="@string/none"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -105,7 +105,7 @@ help me and thank you." />
                 android:layout_marginBottom="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="28sp"
-                android:text="Person Helping you :" />
+                android:text="@string/person_helping_you" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -114,7 +114,7 @@ help me and thank you." />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name :"
+                    android:text="@string/name"
                     android:layout_margin="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="22sp" />
@@ -137,7 +137,7 @@ help me and thank you." />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="karma :"
+                    android:text="@string/karma"
                     android:layout_marginLeft="16dp"
                     android:layout_marginBottom="16dp"
                     android:textColor="@android:color/black"
@@ -161,7 +161,7 @@ help me and thank you." />
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginTop="22dp"
-                android:text="REMOVE PERSON"
+                android:text="@string/remove_person"
                 style="@style/RedButton"/>
         </LinearLayout>
 
@@ -172,7 +172,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
-            android:text="Call PERSON"
+            android:text="@string/call_person"
             style="@style/GreenButton"/>
 
         <Button
@@ -182,7 +182,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
-            android:text="ITINERARY"
+            android:text="@string/itinerary"
             style="@style/GreenButton"/>
 
         <Button
@@ -193,7 +193,7 @@ help me and thank you." />
             android:layout_marginTop="22dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="CANCEL REQUEST"
+            android:text="@string/cancel_request"
             style="@style/RedButton"/>
 
         <Button
@@ -203,7 +203,7 @@ help me and thank you." />
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="24dp"
-            android:text="REQUEST fulfilled"
+            android:text="@string/request_fulfilled"
             android:visibility="gone"
             style="@style/GreenButton"/>
     </LinearLayout>

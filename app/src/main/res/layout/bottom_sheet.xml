@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_margin="16dp"
-            android:text="All of these markers are people in need of help, click on one to start"
+            android:text="@string/helper_text"
             android:textAlignment="center"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -73,7 +73,7 @@ help me and thank you." />
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Estimated price :"
+                    android:text="@string/estimated_price"
                     android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
@@ -97,7 +97,7 @@ help me and thank you." />
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Ability to pay :"
+                    android:text="@string/ability_to_pay"
                     android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
@@ -108,7 +108,7 @@ help me and thank you." />
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
-                    android:text="none"
+                    android:text="@string/none"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp" />
             </RelativeLayout>
@@ -122,7 +122,7 @@ help me and thank you." />
                 android:layout_marginTop="22dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="24dp"
-                android:text="PLEASE HELP ME" />
+                android:text="@string/help" />
         </LinearLayout>
 
     </RelativeLayout>
